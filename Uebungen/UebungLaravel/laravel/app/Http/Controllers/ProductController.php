@@ -14,11 +14,9 @@ class ProductController extends Controller
         
     }
 
-    public function detail($id) {
-        dd($id);
-        $product = \App\Models\Product::find($id);
-
-        return view('productdetail', ['productdetail' => $product]);
-
+    public function detail($id)
+    {
+    $product = \App\Models\Product::find($id);
+    return view('productdetail', ['product' => $product]);
     }
 }

@@ -1,28 +1,10 @@
 <html>
+<body>
+<h1>{{$product->name}}</h1>
+<img src="{{$product->image}}">
+<p>{{$product->description}}</p>
 
-    <head>
-
-        <title>Detail Seite von {{$product->name}}</title>
-
-    </head> 
-
-
-    <body>
-
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Preis</th>
-                <th>Bezeichnung</th>
-            </tr>
-
-            <tr>
-                <td>{{$product->name }}</td>
-                <td>{{$product->price }}</td>
-                <td>{{$product->description }}</td>
-            </tr>
-          
-        </table>
-    </body>
+<button>In den Warenkorb</button>
+</body>
 
 </html>
