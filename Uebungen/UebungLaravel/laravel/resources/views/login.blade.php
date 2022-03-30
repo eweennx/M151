@@ -61,12 +61,12 @@ span.psw {
 
 <h2>Login Form</h2>
 
-<form action="/login" method="post">
-  
+<form action="/loginUser" method="post">
+  @csrf
 
   <div class="container">
-  <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" name="email" id="email" required>
+  <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" id="username" required>
 
     <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>

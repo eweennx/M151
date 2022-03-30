@@ -2,32 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
 
-    public function create()
-    {
-        return view('login');
-    }
-    
-    public function store()
-    {
-        if (auth()->attempt(request(['email', 'password'])) == false) {
-            return back()->withErrors([
-                'message' => 'The email or password is incorrect, please try again'
-            ]);
-        }
-        
-        return redirect()->to('/');
-    }
-    
-    public function destroy()
-    {
-        auth()->logout();
-        
-        return redirect()->to('/');
+    public function loginView(){
+        return view("login");
     }
 
+    public function registerView(){
+        return view("register");
+    }
+
+    public function register() {
+        $username = request()->get('username');
+        $password = request()->get('password');
+
+        // PASSWORT VerschlÃ¼sseln
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        // INSERT USER
+        User::create([
+            'username' => $username,
+            'password' => $password
+        ]);
+
+        return view("login");
+
+    }
+
+    public function login() {
+        $username = request()->get('username');
+        $password = request()->get('password');
+
+        $user = User::where('username', $username)->first();
+
+        if ($user) {
+            if (password_verify($password, $user->password)) {
+                session()->set('userId', $user->id);
+                return redirect ('/products');
+            }
+            else {
+                // Error, password wrong
+                return redirect('/login');
+            }
+        }
+        else {
+            // Error, user not found
+            return redirect ('/register');
+        }
+    }
+
+
+    public function logout() {
+        session()->flush();
+    }
+
+    protected function isUserLoggedIn() {
+        if (session()->has('userId')) {
+            return true;
+        }
+        return false;
+    }
+
+    protected function getUser() {
+        if ($this->isUserLoggedIn()) {
+            return User::find(session()->get('userId'));
+        }
+
+        return null;
+    }
 }
