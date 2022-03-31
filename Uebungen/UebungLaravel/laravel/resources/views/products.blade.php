@@ -29,9 +29,13 @@ a{
 
 
     <body>
-        <h1>Willkommen zum Webshop für Blumentöpfe und Gärtnerzubehör</h1> 
+        <h1>Willkommen zum Webshop für Blumentöpfe und Gärtnerzubehör</h1>
+        @if(session()->has('userId'))
+        <a href="logout">Ausloggen</a>
+        @else
         <a href="login">Einloggen</a>
         <a href="register">Registrieren</a>
+        @endif
         <br><br>
 
         <table>

@@ -41,11 +41,12 @@ class UserController extends Controller
 
         if ($user) {
             if (password_verify($password, $user->password)) {
-                session()->set('userId', $user->id);
+                session()->put('userId', $user->id);
                 return redirect ('/products');
             }
             else {
                 // Error, password wrong
+                dd($user, $username, $password, $user->password);
                 return redirect('/login');
             }
         }
@@ -58,6 +59,7 @@ class UserController extends Controller
 
     public function logout() {
         session()->flush();
+        return redirect ('/products');
     }
 
     protected function isUserLoggedIn() {

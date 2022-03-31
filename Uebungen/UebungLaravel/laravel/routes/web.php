@@ -23,6 +23,8 @@ Route::get('/login', [\App\Http\Controllers\UserController::class, 'loginView'])
 Route::post('/login', [\App\Http\Controllers\UserController::class, 'loginView']);
 Route::post('/loginUser', [\App\Http\Controllers\UserController::class, 'login']);
 
+Route::get('/logout', [\App\Http\Controllers\UserController::class, 'logout']);
+
 Route::get('/register', [\App\Http\Controllers\UserController::class, 'registerView']);
 Route::post('/register', [\App\Http\Controllers\UserController::class, 'registerView']);
 Route::post('registerUser', [\App\Http\Controllers\UserController::class, 'register']);
